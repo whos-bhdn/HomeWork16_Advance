@@ -1,0 +1,35 @@
+<section>
+  <table class="table text-center" >
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Task</th>
+      <th scope="col">Check</th>
+      <th scope="col">DONE/IN PROGRESS</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let objectTasks of childContent; let i = index;" >
+      <td> {{ i+1 }}</td>
+      <td> {{ objectTasks.task }} </td>
+      <td>
+        <input type="checkbox" (change)="changeStatus(i)" [checked]="objectTasks.status">
+      </td>
+      <td>
+        <span [ngStyle]="{'color': objectTasks.status ? 'green' : 'red'}">{{ objectTasks.status ? "DONE" : "IN PROGRESS" }}</span>
+      </td>
+      <td><button type="button"(click)="editTask(i)" class="btn btn-warning">Edit</button></td>
+      <td><button type="button" [disabled]="!objectTasks.status" (click)="deleteTask(i); updateOutputCount()" class="btn btn-danger">Delete</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="isNone">
+    <div class="row g-3 align-items-center" style="width:33%">
+      <input type="text" [(ngModel)]="editNewTask" name="save" class="form-control">
+    </div >
+    <button  type="button" (click)="saveTask()" class="btn btn-success">SAVE</button>
+  </div>
+
+</section>

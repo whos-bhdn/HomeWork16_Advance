@@ -1,0 +1,13 @@
+app/
+    components/
+          header.component
+    pages/
+          home.component
+          hw12.component
+          hw13.component
+          hw14.component
+          hw15.component
+    shared/
+          interfaces
+          pipes
+          styles

@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <form id="inp" class="mb-3" name="inp">
+    <h1>Plan your day</h1>
+    <h2>User: Bohdan Sulyha. Count of Task <span *ngIf="isNull">{{ countTask }}</span> </h2>
+    <div class="row g-3 align-items-center" style="width:33%">
+      <input id="task" type="text" placeholder="enter task" [(ngModel)]="currentTask.task" name="newTask" class="form-control">
+      <button  type="button" id="add" class="add" (click)="addNewTask()" class="btn btn-success">Add</button>
+    </div>
+  </form>
+  <app-table [childContent]="parentContent" (outputData)="getOutputCount($event)"> </app-table>
+</div>
+

@@ -1,0 +1,37 @@
+<div>
+  <a routerLinkActive="active" [routerLink]="[ '' ]" class="btn btn-primary">Go to Home</a>
+</div>
+<div class="wrapper">
+  <form id="inp" class="mb-3" name="inp">
+    <label for="name">Login</label>
+    <input type="text" name="name" placeholder="enter name" id="name" class="name" [(ngModel)]="currentUser.name" name="newName">
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="Enter password" id="password" class="password" [(ngModel)]="currentUser.password" name="newPassword">
+    <label for="email">Email Adress</label>
+    <input type="email" name="email" placeholder="Enter email address" id="email" class="email" [(ngModel)]="currentUser.email" name="newEmail">
+    <button *ngIf="!isEdit" type="button" id="add" class="add btn btn-success" (click)="addUser()" [disabled]="!currentUser.email || !currentUser.password || !currentUser.name">Add User</button>
+    <button *ngIf="isEdit" type="button" (click)="saveUser()" >Save</button>
+  </form>
+  <table class="table">
+    <thead id="t">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Login</th>
+      <th scope="col">Password</th>
+      <th scope="col">Email</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody id="userCol" >
+    <tr *ngFor="let user of arrUsers; let i = index">
+      <td>{{ i+1 }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.password }}</td>
+      <td>{{ user.email }}</td>
+      <td><button type="button" (click)="deleteUser(i)" class="btn btn-danger">Delete</button></td>
+      <td><button type="button" (click)="editUser(i)"class="btn btn-warning">Edit</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,52 @@
+<div>
+  <a routerLinkActive="active" [routerLink]="[ '' ]" class="btn btn-primary">Go to Home</a>
+</div>
+<div class="wrapper" *ngIf="modalStatus">
+  <form id="inp" class="mb-3" name="inp">
+    <h1>My phone book</h1>
+    <hr>
+    <input id="task" type="text" placeholder="search text goes here" [(ngModel)]="newField" name="field">
+    <button  type="button" id="add" class="add btn btn-success" (click)="changeModalStatus()">Add</button>
+    <section>
+      <table class="table text-center">
+        <thead>
+        <tr>
+          <th scope="col" (click)="sortName()">First Name</th>
+          <th scope="col" (click)="sortLastName()">Last Name</th>
+          <th scope="col" (click)="sort()">Number</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of arrUsers | searchPipe: newField; let i = index">
+          <td>{{ user.name }}</td>
+          <td> {{ user.lastname }} </td>
+          <td> {{ user.phone | phonePipe }}</td>
+          <td><button type="button" (click)="editUser(i)" class="btn btn-warning">Edit</button></td>
+          <td><button type="button" (click)="deleteUser(i)" class="btn btn-danger">Delete</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+  </form>
+</div>
+
+<!-- Modal -->
+<div class="modalAutorize" *ngIf="!modalStatus">
+  <div class="header">
+    <h3>Add phone</h3>
+    <span (click)="changeModalStatusSpan()">X</span>
+  </div>
+  <hr>
+  <div class="main">
+    <input type="text" placeholder='ENTER FIRSTNAME' [(ngModel)]="currentUser.name" name="newFirstName">
+    <input type="text"  placeholder='ENTER LASTNAME' [(ngModel)]="currentUser.lastname" name="newLastName">
+    <input type="text"  placeholder='ENTER PHONE NUMBER' [(ngModel)]="currentUser.phone" name="newPhoneNumber">
+  </div>
+  <hr>
+  <button type="button" class="btn-info bg-info" (click)="createUser()" [disabled]="isDisabled" *ngIf="!createOrSave">Create</button>
+  <button type="button" class="btn-info bg-info" (click)="saveUser()" [disabled]="isDisabled" *ngIf="createOrSave">Save</button>
+</div>
+
+

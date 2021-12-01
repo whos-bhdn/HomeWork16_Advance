@@ -1,0 +1,20 @@
+<div>
+  <a routerLinkActive="active" [routerLink]="[ '' ]" class="btn btn-primary">Go to Home</a>
+</div>
+<div class="wrapper">
+  <form name="form">
+    <p>Bad words:
+      <span *ngFor="let word of arrWords">
+        {{ word }}
+      </span>
+    </p>
+
+    <input type="text" name="bad" class="badwords" [(ngModel)]="newWord">
+    <input type="button" class="btn btn-success" [disabled]="!newWord" value="ADD" (click)="addWord()">
+    <input type="button" value="RESET" (click)="resetValue()">
+    <div class="textinput">
+      <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="auditWord"></textarea>
+      <input type="button" name="cenzor" id="cenzor" value="CENZOR" (click)="audit()">
+    </div>
+  </form>
+</div>
